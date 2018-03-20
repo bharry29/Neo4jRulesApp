@@ -45,6 +45,7 @@ public class rulesAppMain {
         {
             System.out.print("Hello User\n");
             createRule();
+            System.out.print("Hello User\n");
         }
         
         else{
