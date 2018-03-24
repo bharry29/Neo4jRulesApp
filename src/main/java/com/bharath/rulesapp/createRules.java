@@ -66,13 +66,5 @@ public static void createRuleFile (String directoryName,String ruleName, String 
     if (!dir.exists()) dir.mkdirs();
     File outFile = new File (directoryName + "/" + ruleName + ".txt");
     FileWriter fWriter = new FileWriter (outFile);
-        try (PrintWriter pWriter = new PrintWriter (fWriter)) {
-            pWriter.println (ruleData);
-            readRuleFile(outFile);
-        }
   }
-
-public static void readRuleFile(File ruleFile) throws IOException{
-                System.out.println("Rule Read");  
-        }
 }
