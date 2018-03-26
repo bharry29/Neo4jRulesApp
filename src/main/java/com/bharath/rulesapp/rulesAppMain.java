@@ -23,17 +23,6 @@ public class rulesAppMain {
     
     public static void main ( String [] arguments ) throws IOException
     {
-        Driver driver = GraphDatabase.driver( "bolt://localhost:11002", AuthTokens.basic( "neo4j", "1234" ) );
-        
-        try ( Session session = driver.session() )
-        {
-            StatementResult rs = session.run( "CREATE (n) RETURN n" );
-            //System.out.print(rs);
-            System.out.print("\nHello CQL Statement\n");
-        }
-        
-        
-        driver.close();
         Scanner input = new Scanner(System.in);
         System.out.print("Hello User. Please Select one option and press enter : 1. Add Rule 2. Test Rule \n");
         
