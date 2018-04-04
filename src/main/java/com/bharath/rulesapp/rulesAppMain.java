@@ -6,8 +6,9 @@
 package com.bharath.rulesapp;
 
 import static com.bharath.rulesapp.createRules.createRule;
-import static com.bharath.rulesapp.testRules.testRules;
+import static com.bharath.rulesapp.testRules.readRules;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
@@ -39,8 +40,28 @@ public class rulesAppMain {
         
         else{
             System.out.print("Hello User. To Test please select an option: 1. Time Based 2. Non-Time Based\n");
-            System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable");
-            testRules();
+            int usertestingnumber = input.nextInt();
+            System.out.println("You entered " + usertestingnumber);
+            
+            if(usertestingnumber ==1)
+            {
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
+                String presenttime = timeformat.format(cal.getTime());
+                System.out.print("The time is : " + presenttime);
+                
+                System.out.println("Your event is " + presenttime);
+                readRules(presenttime);
+            }
+            
+            if(usertestingnumber ==2)
+            {
+                Scanner eventinput = new Scanner(System.in);
+                System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
+                String userinputevent = eventinput.nextLine();
+                System.out.println("Your event is " + userinputevent);
+                readRules(userinputevent);
+            }
         }
     }
 }
