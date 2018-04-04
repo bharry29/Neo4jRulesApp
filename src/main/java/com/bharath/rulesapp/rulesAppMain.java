@@ -33,9 +33,11 @@ public class rulesAppMain {
         
         if(useroptionnumber ==1)
         {
+            System.out.print("Hello User. To Create a rule please select a type: 1. Time Based 2. Non-Time Based\n");
+            int userruletypenumber = input.nextInt();
+            
             System.out.print("Hello User\n");
-            createRule();
-            System.out.print("Hello User\n");
+            createRule(userruletypenumber);
         }
         
         else{
@@ -51,7 +53,7 @@ public class rulesAppMain {
                 System.out.print("The time is : " + presenttime);
                 
                 System.out.println("Your event is " + presenttime);
-                readRules(presenttime);
+                readRules(presenttime,1);
             }
             
             if(usertestingnumber ==2)
@@ -60,7 +62,7 @@ public class rulesAppMain {
                 System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
                 String userinputevent = eventinput.nextLine();
                 System.out.println("Your event is " + userinputevent);
-                readRules(userinputevent);
+                readRules(userinputevent,2);
             }
         }
     }

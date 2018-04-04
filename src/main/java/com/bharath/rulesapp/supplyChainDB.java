@@ -17,7 +17,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
  *
  * @author bharathvadlamannati
  */
-public class createDB {
+public class supplyChainDB {
     public static void main (String[] args)
     {
         System.out.print("\n Initiating Supply Chain Management system \n");

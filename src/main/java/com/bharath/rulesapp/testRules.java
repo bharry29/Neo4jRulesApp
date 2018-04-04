@@ -22,13 +22,22 @@ public class testRules {
     }
     
     
-    public static void readRules(String inputevent) throws FileNotFoundException, IOException{
+    public static void readRules(String inputevent,int ruleType) throws FileNotFoundException, IOException{
         
         System.out.print("Hello User. You are reading and testing rules \n");
         
-        File folder = new File("/Users/bharathvadlamannati/NetBeansProjects/RulesApp/Rules");
+        File ruleFolder = null;
+        if(ruleType== 1)
+        {
+            File folder = new File("/Users/bharathvadlamannati/NetBeansProjects/RulesApp/Rules/TimeBased");
+            ruleFolder = folder;
+        }
+        else{
+            File folder = new File("/Users/bharathvadlamannati/NetBeansProjects/RulesApp/Rules/NonTimebased");
+            ruleFolder = folder;
+        }
         
-        File[] listOfFiles = folder.listFiles();
+        File[] listOfFiles = ruleFolder.listFiles();
         
         for (File file : listOfFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {

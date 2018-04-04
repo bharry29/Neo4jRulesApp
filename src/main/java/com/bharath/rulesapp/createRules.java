@@ -17,10 +17,21 @@ import java.util.*;
 public class createRules {
     public static void main(String [] arguments) throws IOException{
         
-        createRule();
+//        createRule();
     }
-    public static void createRule() throws IOException{
-        String ruleFolder = "Rules";
+    public static void createRule(int ruleType) throws IOException{
+        
+        String ruleFolder;
+        if(ruleType ==1) {
+            String ruleFolderTime = "Rules/TimeBased";
+            ruleFolder = ruleFolderTime;
+        }
+        else
+        {
+            String ruleFolderNonTime = "Rules/NonTimebased";
+            ruleFolder = ruleFolderNonTime;
+        }
+        
         Scanner input = new Scanner(System.in);
         System.out.print("Enter your Rule Name: ");
         String ruleinputname = input.next();
