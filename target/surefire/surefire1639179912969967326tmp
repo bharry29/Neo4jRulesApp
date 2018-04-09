@@ -1,0 +1,6 @@
+#surefire
+#Sun Apr 08 22:50:09 PDT 2018
+maven.ext.class.path=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/java/maven-nblib/netbeans-eventspy.jar
+user.dir=/Users/bharathvadlamannati/NetBeansProjects/RulesApp
+localRepository=/Users/bharathvadlamannati/.m2/repository
+basedir=/Users/bharathvadlamannati/NetBeansProjects/RulesApp
