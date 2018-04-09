@@ -1,4 +1,0 @@
-input
-event
-cond
-action

@@ -5,7 +5,8 @@
 */
 package com.bharath.rulesapp;
 
-import static com.bharath.rulesapp.CreateRule.createRule;
+import static com.bharath.rulesapp.createRule.createRule;
+import static com.bharath.rulesapp.testRules.findRules;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,13 +15,13 @@ import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
-import static com.bharath.rulesapp.TestRules.findRules;
+
 
 /**
  *
  * @author bharath vadlamannati
  */
-public class RulesApp {
+public class rulesAppMain {
     
     public static void main ( String [] arguments ) throws IOException
     {

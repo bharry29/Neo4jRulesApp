@@ -1,0 +1,4 @@
+inut
+event
+condition
+action
