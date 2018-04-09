@@ -1,7 +1,0 @@
-Input Parameters: {hello}
-
-
-
-Event:event
-Condition:condition
-Action:action

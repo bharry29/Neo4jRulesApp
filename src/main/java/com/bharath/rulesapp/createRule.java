@@ -38,19 +38,19 @@ public class createRule {
         
         //Input Parameters
         System.out.print("Enter your Rule Input Parameters: ");
-        String ruleinputparameters = input.next();
+        String ruleinputparameters = "Input Parameters:" + "{" + input.next() + "}";
         
         //Event
         System.out.print("Enter your Rule's Event part: ");
-        String ruleinputevent = input.next();
+        String ruleinputevent = "Event:" + "{" + input.next() + "}";;
         
         //Condition
         System.out.print("Enter your Rule's Condition part: ");
-        String ruleinputcondition = input.next();
+        String ruleinputcondition = "Condition:" + "{" + input.next() + "}";;
         
         //Action
         System.out.print("Enter your Rule's Action part: ");
-        String ruleinputAction = input.next();
+        String ruleinputAction = "Action:" + "{" + input.next() + "}";;
         
         String fullrule = ruleinputparameters + "\n" + ruleinputevent + "\n" + ruleinputcondition + "\n" + ruleinputAction;
         

@@ -1,4 +1,0 @@
-inut
-event
-condition
-action

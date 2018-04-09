@@ -41,22 +41,28 @@ public class testRules {
         
         File[] listOfFiles = ruleFolder.listFiles();
         
+        int count = 0;
+        List<String> resultFiles = new ArrayList<String>();
         for (File file : listOfFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
                 Scanner txtscan = new Scanner(file);
                 
                 while(txtscan.hasNextLine()){
                     String str = txtscan.nextLine();
-                    if(!str.contains(inputevent)){
-                        System.out.println("The Event DOES NOT EXIST in existing rules");
-                    }
-                    else
-                    {
-                        System.out.println("The Event EXISTS" + " in "+ file.getName()) ;
-                        
+                    if(str.contains(inputevent)){ 
+                        count++;
+                        resultFiles.add(file.getName());
                     }
                 }
             }
+        }
+        
+        if (count>0){
+            System.out.println("The Event EXISTS" + " in "+ resultFiles) ;
+        }
+        
+        else{
+            System.out.println("The Event DOES NOT EXIST in existing rules repository");
         }
     }
     
