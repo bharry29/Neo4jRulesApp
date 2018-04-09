@@ -8,6 +8,8 @@ package com.bharath.rulesapp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import org.apache.commons.io.FileUtils;
 
@@ -15,14 +17,14 @@ import org.apache.commons.io.FileUtils;
  *
  * @author bharathvadlamannati
  */
-public class testRules {
+public class TestRules {
     
     public static void testRules (String[] args) throws FileNotFoundException, IOException{
         //readRules();
     }
     
     
-    public static void readRules(String inputevent,int ruleType) throws FileNotFoundException, IOException{
+    public static void findRules(String inputevent,int ruleType) throws FileNotFoundException, IOException{
         
         System.out.print("Hello User. You are reading and testing rules \n");
         
@@ -51,10 +53,37 @@ public class testRules {
                     else
                     {
                         System.out.println("The Event EXISTS" + " in "+ file.getName()) ;
+                        
                     }
                 }
             }
         }
     }
     
+    public static void readRules (File ruleFile){
+        try {
+            File f = ruleFile;
+            Scanner sc = new Scanner(f);
+            
+            List<Rule> rules = new ArrayList<Rule>();
+            
+            while(sc.hasNextLine()){
+                String line = sc.nextLine();
+                String[] ruledetails = line.split(":");
+                String params = ruledetails[0];
+                String event = ruledetails[1];
+                String condition = ruledetails[2];
+                String action = ruledetails[3];
+                Rule r = new Rule(params, event, condition, action);
+                rules.add(r);
+            }
+            
+            for(Rule p: rules){
+                System.out.println(p.toString());
+            }
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } 
+    }
 }

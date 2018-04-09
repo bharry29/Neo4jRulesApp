@@ -5,8 +5,7 @@
 */
 package com.bharath.rulesapp;
 
-import static com.bharath.rulesapp.createRules.createRule;
-import static com.bharath.rulesapp.testRules.readRules;
+import static com.bharath.rulesapp.CreateRule.createRule;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -15,12 +14,13 @@ import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
+import static com.bharath.rulesapp.TestRules.findRules;
 
 /**
  *
  * @author bharath vadlamannati
  */
-public class rulesAppMain {
+public class RulesApp {
     
     public static void main ( String [] arguments ) throws IOException
     {
@@ -53,7 +53,7 @@ public class rulesAppMain {
                 System.out.print("The time is : " + presenttime);
                 
                 System.out.println("Your event is " + presenttime);
-                readRules(presenttime,1);
+                findRules(presenttime,1);
             }
             
             if(usertestingnumber ==2)
@@ -62,7 +62,7 @@ public class rulesAppMain {
                 System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
                 String userinputevent = eventinput.nextLine();
                 System.out.println("Your event is " + userinputevent);
-                readRules(userinputevent,2);
+                findRules(userinputevent,2);
             }
         }
     }

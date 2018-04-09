@@ -14,7 +14,7 @@ import java.util.*;
  *
  * @author bharathvadlamannati
  */
-public class createRules {
+public class CreateRule {
     public static void main(String [] arguments) throws IOException{
         
 //        createRule();
