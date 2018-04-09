@@ -1,0 +1,6 @@
+Input Parameters: {hello2}
+
+
+Event:event1
+Condition:condition
+Action:action
