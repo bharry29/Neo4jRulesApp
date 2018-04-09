@@ -1,2 +1,2 @@
 # Neo4jRulesApp
-My Masters Project
+Initial Commit for My Masters Project
