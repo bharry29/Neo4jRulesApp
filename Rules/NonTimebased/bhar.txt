@@ -1,4 +1,4 @@
-Input Parameters:{input}
-Event:{event}
+Input Parameters:{event}
+Event:{eve}
 Condition:{condition}
 Action:{action}

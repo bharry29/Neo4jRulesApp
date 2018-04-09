@@ -79,6 +79,6 @@ public class Rule{
     }
     
     public String toString(){
-        return this.params + " " + this.event + " " + this.condition + " " + this.action;
+        return (this.params + " " + this.event + " " + this.condition + " " + this.action);
     }
 }
