@@ -1,0 +1,4 @@
+Input Parameters:{time}
+Event:{1:13 PM}
+Condition:{cond}
+Action:{action}
