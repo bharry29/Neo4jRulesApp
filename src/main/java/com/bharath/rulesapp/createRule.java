@@ -36,25 +36,36 @@ public class createRule {
         System.out.print("Enter your Rule Name: ");
         String ruleinputname = input.next();
         
+        
         //Input Parameters
-        System.out.print("Enter your Rule Input Parameters: ");
-        String ruleinputparameters = "Input Parameters:" + "{" + input.next() + "}";
+        System.out.print("How many Input parameters for this rule ? ");
+        int ruleinputparameterscount = input.nextInt();
+        
+        List<String> ruleinputparameterslist = new ArrayList<String>();
+        
+        for (int i = 0; i< ruleinputparameterscount; i++){
+            System.out.print("Enter your Rule's number" + (i+1) + " Input Parameter(s): ");
+            String ruleinputparameters = input.next();
+            ruleinputparameterslist.add(ruleinputparameters);
+        }
+        //Input Parameters
+        
         
         //Event
         System.out.print("Enter your Rule's Event part: ");
-        String ruleinputevent = "Event:" + "{" + input.next() + "}";;
+        String ruleinputevent = input.nextLine();
         
         //Condition
         System.out.print("Enter your Rule's Condition part: ");
-        String ruleinputcondition = "Condition:" + "{" + input.next() + "}";;
+        String ruleinputcondition = input.nextLine() ;
         
         //Action
         System.out.print("Enter your Rule's Action part: ");
-        String ruleinputAction = "Action:" + "{" + input.next() + "}";;
+        String ruleinputAction = input.nextLine();
         
-        String fullrule = ruleinputparameters + "\n" + ruleinputevent + "\n" + ruleinputcondition + "\n" + ruleinputAction;
+        String fullrule = "Input Parameters:" + "{" + ruleinputparameterslist + "}" + "\n" + "Event:" +"{" + ruleinputevent + "}" + "\n" + "Conditon:" + "{" + ruleinputcondition + "}" +  "\n" + "Action:" + "{" + ruleinputAction + "}";
         
-        System.out.println("Your rule is: " + ruleinputname + "\n" + ruleinputparameters + "\n" + fullrule.toUpperCase());
+        System.out.println("Your rule is: " + ruleinputname + "\n" + ruleinputparameterslist + "\n" + fullrule);
         
         System.out.println("Do you want to save it to Rules Repository (y/n)?");
         String saveruleoption = input.next();

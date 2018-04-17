@@ -1,0 +1,4 @@
+Input Parameters:[{name}, {age}]
+Event:{MATCH (n:Retailer) RETURN n LIMIT 25}
+Condition:{condition}
+Action:{action}

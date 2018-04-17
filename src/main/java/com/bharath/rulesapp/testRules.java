@@ -46,6 +46,7 @@ public class testRules {
         int count = 0;
         List<String> resultFileNames = new ArrayList<String>();
         List<String> resultFilePaths = new ArrayList<String>();
+        List<String> paramsList = new ArrayList<String>();
         
         for (File file : listOfFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
@@ -53,6 +54,11 @@ public class testRules {
                 
                 while(txtscan.hasNextLine()){
                     String str = txtscan.nextLine();
+                    
+                    if(str.contains("Input Parameters:")){
+                        paramsList.add(str);
+                    }
+
                     if(str.contains("Event:{" + inputevent)){
                         count++;
                         resultFileNames.add(file.getName());
@@ -70,6 +76,7 @@ public class testRules {
                 String filename = p.getFileName().toString();
                 System.out.println("Rule "+ filecount +  ":" + filename);
                 printRuleFile(filepath);
+                readRuleParams(paramsList);
                 filecount++;
             }
         }
@@ -79,6 +86,16 @@ public class testRules {
         }
     }
     
+    
+    public static void readRuleParams(List<String> paramsList)
+    {
+       System.out.println(paramsList); 
+    }
+    
+    public static void printRuleParams(List<String> paramsList){
+        
+        System.out.println(paramsList);
+    }
 //    public static void readRules (File ruleFile){
 //        try {
 //            File f = ruleFile;

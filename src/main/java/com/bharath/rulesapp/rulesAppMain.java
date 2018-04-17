@@ -5,7 +5,10 @@
 */
 package com.bharath.rulesapp;
 
+import static com.bharath.rulesapp.TestDB.testDB;
 import static com.bharath.rulesapp.createRule.createRule;
+//import static com.bharath.rulesapp.neo4jDb.TransactionResult;
+//import static com.bharath.rulesapp.neo4jDb.runQuery;
 import static com.bharath.rulesapp.testRules.findRules;
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -23,7 +26,7 @@ import org.neo4j.driver.v1.StatementResult;
  */
 public class rulesAppMain {
     
-    public static void main ( String [] arguments ) throws IOException
+    public static void main ( String [] arguments ) throws IOException, Exception
     {
         Scanner input = new Scanner(System.in);
         System.out.print("Hello User. Please Select one option and press enter : 1. Add Rule 2. Test Rule \n");
@@ -64,6 +67,9 @@ public class rulesAppMain {
                 String userinputevent = eventinput.nextLine();
                 System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
                 findRules(userinputevent,2);
+                testDB();
+//                TransactionResult(userinputevent);
+//                runQuery();
             }
         }
     }
