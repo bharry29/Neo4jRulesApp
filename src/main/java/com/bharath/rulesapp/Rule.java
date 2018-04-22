@@ -17,8 +17,9 @@ import java.util.Scanner;
  */
 public class Rule{
     
-    private String params;
+    private List<String> paramsList;
     private int paramscount;
+	private String params;
     private String event;
     private String condition;
     private String action;
@@ -29,6 +30,17 @@ public class Rule{
         this.condition = condition;
         this.action = action;
     }
+
+	 public Rule(List<String> paramsList, String event, String condition, String action){
+        this.paramsList = paramsList;
+        this.event = event;
+        this.condition = condition;
+        this.action = action;
+    }
+
+    public Rule() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public String getRuleParams() {
@@ -38,6 +50,15 @@ public class Rule{
 
     public void setRuleParams(String params) {
         this.params = params;
+    }
+
+	 public List<String> getRuleParamsList() {
+        return paramsList;
+    }
+    
+
+    public void setRuleParamsList(List<String> paramsList) {
+        this.paramsList = paramsList;
     }
     
 
@@ -53,7 +74,7 @@ public class Rule{
     
 
     public String getCondition() {
-        return event;
+        return condition;
     }
     
     

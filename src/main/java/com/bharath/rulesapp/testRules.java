@@ -12,9 +12,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
+import static com.bharath.rulesapp.TestDB.testRule;
 /**
  *
  * @author bharathvadlamannati
@@ -26,7 +27,7 @@ public class testRules {
     }
     
     
-    public static void findRules(String inputevent,int ruleType) throws FileNotFoundException, IOException{
+    public static void findRules(String inputevent,int ruleType) throws FileNotFoundException, IOException, Exception{
         
         System.out.print("Hello User. You are testing rules from the repository\n");
         
@@ -46,27 +47,64 @@ public class testRules {
         int count = 0;
         List<String> resultFileNames = new ArrayList<String>();
         List<String> resultFilePaths = new ArrayList<String>();
-        List<String> paramsList = new ArrayList<String>();
         
+        List<Rule> rulesList = new ArrayList<Rule>();
         for (File file : listOfFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
                 Scanner txtscan = new Scanner(file);
-                
-                while(txtscan.hasNextLine()){
-                    String str = txtscan.nextLine();
-                    
-                    if(str.contains("Input Parameters:")){
-                        paramsList.add(str);
-                    }
-
-                    if(str.contains("Event:{" + inputevent)){
-                        count++;
-                        resultFileNames.add(file.getName());
-                        resultFilePaths.add(file.getPath());
+                Rule newRule = new Rule();
+                if(txtscan.hasNextLine()){
+                    String inputParamsString = txtscan.nextLine();
+                    if(txtscan.hasNextLine()){
+                        String event = txtscan.nextLine();
+                        
+                        if(event.contains("Event:{" + inputevent)){
+                            count++;
+                            resultFileNames.add(file.getName());
+                            resultFilePaths.add(file.getPath());
+                            int endIndex = event.lastIndexOf("}");
+                            int startIndex = event.indexOf("{");
+                            String eventValue = event.substring(startIndex+1,endIndex);
+                            newRule.setEvent(eventValue);
+                            
+                            if(inputParamsString.contains("Input Parameters:")){
+                                endIndex = inputParamsString.lastIndexOf("]");
+                                startIndex = inputParamsString.indexOf("[");
+                                String paramsValue = inputParamsString.substring(startIndex+1,endIndex);
+                                List<String> paramsList = new ArrayList<String>(
+                                        Arrays.asList(paramsValue.split(", ")));
+                                newRule.setRuleParamsList(paramsList);
+                            }
+                            
+                            if(txtscan.hasNextLine()){
+                                String condition = txtscan.nextLine();
+                                if(condition.contains("Condition:")){
+                                    endIndex = condition.lastIndexOf("}");
+                                    startIndex = condition.indexOf("{");
+                                    String conditionValue = condition.substring(startIndex+1,endIndex);
+                                    newRule.setCondition(conditionValue);
+                                }
+                            }
+                            
+                            if(txtscan.hasNextLine()){
+                                String action = txtscan.nextLine();
+                                if(action.contains("Action:")){
+                                    endIndex = action.lastIndexOf("}");
+                                    startIndex = action.indexOf("{");
+                                    String actionValue = action.substring(startIndex+1,endIndex);
+                                    newRule.setAction(actionValue);
+                                }
+                            }
+                            
+                            rulesList.add(newRule);
+                        }
+                        
                     }
                 }
             }
         }
+        
+        
         
         if (count>0){
             int filecount = 1;
@@ -76,9 +114,10 @@ public class testRules {
                 String filename = p.getFileName().toString();
                 System.out.println("Rule "+ filecount +  ":" + filename);
                 printRuleFile(filepath);
-                readRuleParams(paramsList);
-                filecount++;
+filecount++;
             }
+            
+            testRule(rulesList);
         }
         
         else{
@@ -86,43 +125,15 @@ public class testRules {
         }
     }
     
-    
     public static void readRuleParams(List<String> paramsList)
     {
-       System.out.println(paramsList); 
+        System.out.println(paramsList);
     }
     
     public static void printRuleParams(List<String> paramsList){
         
         System.out.println(paramsList);
     }
-//    public static void readRules (File ruleFile){
-//        try {
-//            File f = ruleFile;
-//            Scanner sc = new Scanner(f);
-//
-//            List<Rule> rules = new ArrayList<Rule>();
-//
-//            while(sc.hasNextLine()){
-//                String line = sc.nextLine();
-//                String[] ruledetails = line.split(":");
-//                String params = ruledetails[0];
-//                String event = ruledetails[1];
-//                String condition = ruledetails[2];
-//                String action = ruledetails[3];
-//                Rule r = new Rule(params, event, condition, action);
-//                rules.add(r);
-//            }
-//
-//            for(Rule p: rules){
-//                System.out.println(p.toString());
-//            }
-//
-//        }
-//        catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
     
     public static void printRuleFile(String inputFilePath) throws FileNotFoundException, IOException{
         

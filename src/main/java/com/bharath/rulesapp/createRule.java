@@ -8,6 +8,7 @@ package com.bharath.rulesapp;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.util.*;
 
 /**
@@ -31,44 +32,40 @@ public class createRule {
             String ruleFolderNonTime = "Rules/NonTimebased";
             ruleFolder = ruleFolderNonTime;
         }
-        
+        List<String> ruleinputparameterslist = new ArrayList<String>();
+        String ruleinputevent = "", ruleinputcondition = "", ruleinputAction = "";
         Scanner input = new Scanner(System.in);
         System.out.print("Enter your Rule Name: ");
-        String ruleinputname = input.next();
+        String ruleinputname = input.nextLine();
         
         
         //Input Parameters
         System.out.print("How many Input parameters for this rule ? ");
-        int ruleinputparameterscount = input.nextInt();
+        String ruleinputparameterscount = input.nextLine();
         
-        List<String> ruleinputparameterslist = new ArrayList<String>();
-        
-        for (int i = 0; i< ruleinputparameterscount; i++){
-            System.out.print("Enter your Rule's number" + (i+1) + " Input Parameter(s): ");
-            String ruleinputparameters = input.next();
+        for (int i = 0; i< parseInt(ruleinputparameterscount); i++){
+            System.out.print("Enter your Rule's number " + (i+1) + " Input Parameter(s): ");
+            String ruleinputparameters = input.nextLine();
             ruleinputparameterslist.add(ruleinputparameters);
         }
-        //Input Parameters
-        
         
         //Event
         System.out.print("Enter your Rule's Event part: ");
-        String ruleinputevent = input.nextLine();
-        
+        ruleinputevent = input.nextLine();
         //Condition
         System.out.print("Enter your Rule's Condition part: ");
-        String ruleinputcondition = input.nextLine() ;
+        ruleinputcondition = input.nextLine() ;
         
         //Action
         System.out.print("Enter your Rule's Action part: ");
-        String ruleinputAction = input.nextLine();
+        ruleinputAction = input.nextLine();
         
-        String fullrule = "Input Parameters:" + "{" + ruleinputparameterslist + "}" + "\n" + "Event:" +"{" + ruleinputevent + "}" + "\n" + "Conditon:" + "{" + ruleinputcondition + "}" +  "\n" + "Action:" + "{" + ruleinputAction + "}";
+        String fullrule = "Input Parameters:" + ruleinputparameterslist + "\n" + "Event:" +"{" + ruleinputevent + "}" + "\n" + "Condition:" + "{" + ruleinputcondition + "}" +  "\n" + "Action:" + "{" + ruleinputAction + "}";
         
-        System.out.println("Your rule is: " + ruleinputname + "\n" + ruleinputparameterslist + "\n" + fullrule);
+//        System.out.println("Your rule is: " + ruleinputname + "\n" + ruleinputparameterslist + "\n" + fullrule);
         
         System.out.println("Do you want to save it to Rules Repository (y/n)?");
-        String saveruleoption = input.next();
+        String saveruleoption = input.nextLine();
         
         if("y".equals(saveruleoption)){
             createRuleFile(ruleFolder,ruleinputname,fullrule);
@@ -77,6 +74,7 @@ public class createRule {
         else{
             System.out.println("Rule Not Saved...!!! Exiting to Main Menu");
         }
+        input.close();
     }
     
     public static void createRuleFile (String directoryName,String ruleName, String ruleData) throws IOException

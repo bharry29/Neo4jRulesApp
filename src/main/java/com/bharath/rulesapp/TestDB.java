@@ -9,9 +9,12 @@ package com.bharath.rulesapp;
  *
  * @author bharathvadlamannati
  */
+import java.io.File;
+import java.util.List;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
@@ -27,7 +30,7 @@ import static org.neo4j.driver.v1.Values.parameters;
  */
 
 public class TestDB implements AutoCloseable
-{
+{ 
     private final Driver driver;
     
     public TestDB( String uri, String user, String password )
@@ -40,50 +43,50 @@ public class TestDB implements AutoCloseable
     {
         driver.close();
     }
-    
-    public void printGreeting(String prevmessage, String message ) throws Exception
+    public void executeRules(List<Rule> rules) throws Exception
     {
-        String prevmsg = prevmessage;
-        String msg = message;
-        try ( Session session = driver.session() )
+         try ( Session session = driver.session() )
         {
-            String greeting = session.writeTransaction( new TransactionWork<String>()
+        for (Rule rule : rules) {
+        
+            String output = session.writeTransaction( new TransactionWork<String>()
             {
                 @Override
                 public String execute( Transaction tx )
                 {
-                    String event = "CREATE (a:Greeting2) ";
+                    String event = rule.getEvent();
                     
-                    String condition = "SET a.message = {message}"  ;
+                    String condition = rule.getCondition() ;
                     
-                    String action = " RETURN a.message + ', from node ' + id(a)";
+                    String action = rule.getAction();
                     
-                    System.out.println("Full Tran:" + event + condition + action);
+                    String fullTran = event + " " + condition + " " + action;
+                    System.out.println("Full Tran:" + fullTran);
                     
-                    StatementResult result = tx.run( event + condition + action ,
-                            parameters( "message", prevmsg));
-
-                    return result.single().get(0).asString();
+                    StatementResult result = tx.run(fullTran);
+                            //parameters( "message", prevmsg));
+                    Record records = result.single();
+                    
+                    return "The Output from DB is : " + records.fields().toString();
                 }
             } );
             
-            System.out.println(greeting);
+            System.out.println(output);
+       
         }
+         }
         
         catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
         close();
-        
     }
     
-    public static void testDB() throws Exception
+    public static void testRule(List<Rule> rules) throws Exception
     {
-        try ( TestDB greeter = new TestDB( "bolt://localhost:11002", "neo4j", "1234" ) )
+        try ( TestDB db = new TestDB( "bolt://localhost:11002", "neo4j", "1234" ) )
         {
-            greeter.printGreeting( "hello", "hello, bharath" );
+            db.executeRules(rules); 
         }
-    }
-    
-    
+    } 
 }

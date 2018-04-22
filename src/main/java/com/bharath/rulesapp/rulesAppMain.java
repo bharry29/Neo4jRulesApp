@@ -5,7 +5,6 @@
 */
 package com.bharath.rulesapp;
 
-import static com.bharath.rulesapp.TestDB.testDB;
 import static com.bharath.rulesapp.createRule.createRule;
 //import static com.bharath.rulesapp.neo4jDb.TransactionResult;
 //import static com.bharath.rulesapp.neo4jDb.runQuery;
@@ -49,28 +48,28 @@ public class rulesAppMain {
             int usertestingnumber = input.nextInt();
             System.out.println("You entered " + usertestingnumber);
             
+            Scanner eventinput = new Scanner(System.in);
+            System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
+            String userinputevent = eventinput.nextLine();
+            System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat timeformat = new SimpleDateFormat("K:mm a");
+            String presenttime = timeformat.format(cal.getTime());
+            System.out.print("The time is : " + "\"" + presenttime + "\" \n");
+            
+            String presenttimeevent = "WITH " + "\"" + presenttime + "\" AS currenttime ";
+            
             if(usertestingnumber ==1)
             {
-                Calendar cal = Calendar.getInstance();
-                SimpleDateFormat timeformat = new SimpleDateFormat("K:mm a");
-                String presenttime = timeformat.format(cal.getTime());
-                System.out.print("The time is : " + "\"" + presenttime + "\" \n");
-                
-                System.out.println("Your event is : " + "\"" + presenttime + "\" \n");
-                findRules(presenttime,1);
+                System.out.println(presenttimeevent + userinputevent);
+                findRules(presenttimeevent + userinputevent, 1);
             }
             
             if(usertestingnumber ==2)
             {
-                Scanner eventinput = new Scanner(System.in);
-                System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
-                String userinputevent = eventinput.nextLine();
-                System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
                 findRules(userinputevent,2);
-                testDB();
-//                TransactionResult(userinputevent);
-//                runQuery();
             }
         }
+        input.close();
     }
 }
