@@ -1,0 +1,4 @@
+Input Parameters:{[]}
+Event:{MATCH (c:Customers) WITH c}
+Condition:{WHERE c.Name = "Bharath" }
+Action:{RETURN c.GoesToRetailer LIMIT 1}

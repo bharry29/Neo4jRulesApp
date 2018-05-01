@@ -1,4 +1,0 @@
-Input Parameters:{input}
-Event:{event}
-Condition:{condition}
-Action:{action}

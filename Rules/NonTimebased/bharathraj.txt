@@ -1,4 +1,4 @@
-Input Parameters:[{name}, {age}]
-Event:{MATCH (n:Retailer) RETURN n LIMIT 25}
-Condition:{condition}
-Action:{action}
+Input Parameters:[{0}]
+Event:{CREATE (a:Greeting2)}
+Condition:{SET a.message = "Hello Aira"}
+Action:{RETURN a.message + ', from node ' + id(a)}

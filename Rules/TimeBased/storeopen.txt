@@ -1,0 +1,4 @@
+Input Parameters:[0]
+Event:{WITH "11:43 AM" AS currenttime MATCH (r:Retailer) WITH r,currenttime MATCH n = (r)-[s:sells]->(p:Product)}
+Condition:{WHERE r.openingTime = currenttime AND r.name = "Prestige Liquor Store" AND s.productname ="b"}
+Action:{SET r.isStoreOpenforOrdering = true RETURN r;}
