@@ -1,4 +1,4 @@
 Input Parameters:{[]}
-Event:{MATCH (c:Customers) WITH c}
-Condition:{WHERE c.Name = "Bharath" }
-Action:{RETURN c.GoesToRetailer LIMIT 1}
+Event:{MATCH (c:Customer) WITH c}
+Condition:{WHERE c.Name = "Bharath"}
+Action:{RETURN c.GoesTo LIMIT 1}

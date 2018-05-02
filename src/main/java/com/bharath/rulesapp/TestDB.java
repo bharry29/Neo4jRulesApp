@@ -60,7 +60,7 @@ public class TestDB implements AutoCloseable
                     
                     String action = rule.getAction();
                     
-                    String fullTran = event + " " + condition + " " + action;
+                    String fullTran = event + " \n" + condition + "\n" + action;
                     System.out.println("Full Tran:" + fullTran);
                     
                     StatementResult result = tx.run(fullTran);

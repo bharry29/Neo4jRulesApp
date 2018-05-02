@@ -62,8 +62,9 @@ public class testRules {
                             count++;
                             resultFileNames.add(file.getName());
                             resultFilePaths.add(file.getPath());
-                            int endIndex = event.lastIndexOf("}");
                             int startIndex = event.indexOf("{");
+                            int endIndex = event.lastIndexOf("}");
+ 
                             String eventValue = event.substring(startIndex+1,endIndex);
                             newRule.setEvent(eventValue);
                             

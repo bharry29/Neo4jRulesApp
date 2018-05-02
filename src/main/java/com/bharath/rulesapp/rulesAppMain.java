@@ -48,26 +48,37 @@ public class rulesAppMain {
             int usertestingnumber = input.nextInt();
             System.out.println("You entered " + usertestingnumber);
             
-            Scanner eventinput = new Scanner(System.in);
-            System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
-            String userinputevent = eventinput.nextLine();
-            System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat timeformat = new SimpleDateFormat("K:mm a");
-            String presenttime = timeformat.format(cal.getTime());
-            System.out.print("The time is : " + "\"" + presenttime + "\" \n");
-            
-            String presenttimeevent = "WITH " + "\"" + presenttime + "\" AS currenttime ";
-            
-            if(usertestingnumber ==1)
-            {
-                System.out.println(presenttimeevent + userinputevent);
-                findRules(presenttimeevent + userinputevent, 1);
-            }
-            
-            if(usertestingnumber ==2)
-            {
-                findRules(userinputevent,2);
+            try (Scanner eventinput = new Scanner(System.in)) {
+                System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
+                
+                String userinputevent = null;
+                ArrayList<String> userinputcompleteevent = new ArrayList<>();
+                for(userinputevent = eventinput.nextLine();!userinputevent.isEmpty();userinputevent = eventinput.nextLine()){
+                    userinputcompleteevent.add(userinputevent);
+                }
+                
+                for(String s: userinputcompleteevent)
+                {
+                    userinputevent += s;
+                }
+                
+                System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat timeformat = new SimpleDateFormat("K:mm a");
+                String presenttime = timeformat.format(cal.getTime());
+                System.out.print("The time is : " + "\"" + presenttime + "\" \n");
+                
+                if(usertestingnumber ==1)
+                {
+                    String presenttimeevent = "WITH " + "\"" + presenttime + "\" AS currenttime ";
+                    System.out.println(presenttimeevent + userinputevent);
+                    findRules(presenttimeevent + userinputevent, 1);
+                }
+                
+                if(usertestingnumber ==2)
+                {
+                    findRules(userinputevent,2);
+                }
             }
         }
         input.close();
