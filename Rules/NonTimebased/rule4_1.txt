@@ -1,4 +1,4 @@
-Input Parameters:["newRating,"prodname","storeName"]
+Input Parameters:["newRating","prodname","storeName"]
 Event:{MATCH (r:Retailer)
 WITH r, 3.0 as newRating,"c" as prodname,"Prestige Liquor Store" as storeName
 MATCH (p:Product)-[sb:SoldBy]->(r) WHERE p.name = prodname and r.name = storeName SET r.Rating = newRating}

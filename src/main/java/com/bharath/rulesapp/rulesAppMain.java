@@ -59,7 +59,7 @@ public class rulesAppMain {
                 
                 for(String s: userinputcompleteevent)
                 {
-                    userinputevent += s;
+                    userinputevent += s+" ";
                 }
                 
                 System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
