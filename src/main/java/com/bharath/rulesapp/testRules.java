@@ -85,7 +85,7 @@ public class testRules {
                   }
                          if(event != null && !event.isEmpty()){
                         // event = txtscan.nextLine(); 
-                        if(event.contains("Event:{" + inputevent)){
+                        if(event.trim().contains("Event:{" + inputevent.trim())){
                             count++;
                             resultFileNames.add(file.getName());
                             resultFilePaths.add(file.getPath());
@@ -97,7 +97,7 @@ public class testRules {
                          }
                          
                           
-                            inputParamValues = validateInputEvent(inputevent, eventValue, paramsList);
+                            inputParamValues = validateInputEvent(inputevent.trim(), eventValue.trim(), paramsList);
                             if(inputParamValues != null && inputParamValues.length != 0)
 						{
                             newRule.setEvent(eventValue);
@@ -159,16 +159,20 @@ filecount++;
 		// Find match between user entered event and event in rule file	
 		int numberOfParams = paramsList.size();
 		String[] userInputArray = new String[numberOfParams];
-		String patternTemplate = "";
+		String patternTemplate = eventInFile;
+                
+                patternTemplate =  escapeRE(patternTemplate);
 		for(String param:paramsList)
 		{
                     param = param.replace("\"", "");
 			if(!eventInFile.contains(param)){
 				return null;
 			}
-			patternTemplate = eventInFile.replace(param, "(.*)");   
+			patternTemplate = patternTemplate.replace(param, "(.*)");   
 		}
-		Pattern pattern = Pattern.compile(patternTemplate);
+                
+               
+		Pattern pattern = Pattern.compile(patternTemplate) ;
 		Matcher matcher = pattern.matcher(inputEvent);
 		
 		if (matcher.matches()) {
@@ -176,7 +180,14 @@ filecount++;
 			userInputArray[i] = matcher.group(i+1);			
 		} 
 		return userInputArray;
+                        
 	}
+    
+    public static String escapeRE(String str) {
+    Pattern escaper = Pattern.compile("([^a-zA-z0-9\\[\\]])");
+    return escaper.matcher(str).replaceAll("\\\\$1");
+    
+  }
     
     public static void readRuleParams(List<String> paramsList)
     {
