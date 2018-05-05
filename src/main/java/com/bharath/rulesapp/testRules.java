@@ -85,7 +85,7 @@ public class testRules {
                   }
                          if(event != null && !event.isEmpty()){
                         // event = txtscan.nextLine(); 
-                        if(event.trim().contains("Event:{" + inputevent.trim())){
+                        if(event.trim().contains("Event:{")){
                             count++;
                             resultFileNames.add(file.getName());
                             resultFilePaths.add(file.getPath());
@@ -102,7 +102,7 @@ public class testRules {
 						{
                             newRule.setEvent(eventValue);
                             
-                                                
+                            newRule.setRuleParamsValues(Arrays.asList(inputParamValues));        
                             
                             if(txtscan.hasNextLine()){
                                 String condition = txtscan.nextLine();
@@ -161,7 +161,7 @@ filecount++;
 		String[] userInputArray = new String[numberOfParams];
 		String patternTemplate = eventInFile;
                 
-                patternTemplate =  escapeRE(patternTemplate);
+                patternTemplate = escapeRE(patternTemplate);
 		for(String param:paramsList)
 		{
                     param = param.replace("\"", "");
@@ -184,9 +184,10 @@ filecount++;
 	}
     
     public static String escapeRE(String str) {
-    Pattern escaper = Pattern.compile("([^a-zA-z0-9\\[\\]])");
+    Pattern escaper = Pattern.compile("([^a-zA-z0-9])");
+    str = escaper.matcher(str).replaceAll("\\\\$1");
+    escaper = Pattern.compile("([\\[\\]])");
     return escaper.matcher(str).replaceAll("\\\\$1");
-    
   }
     
     public static void readRuleParams(List<String> paramsList)

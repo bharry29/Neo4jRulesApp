@@ -1,5 +1,0 @@
-Input Parameters:["0"]
-Event:{hello
-hello)
-Condition:{cond}
-Action:{act}

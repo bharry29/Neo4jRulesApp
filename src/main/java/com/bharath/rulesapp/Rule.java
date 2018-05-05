@@ -23,6 +23,7 @@ public class Rule{
     private String event;
     private String condition;
     private String action;
+     private List<String> paramsValues;
     
     public Rule(String params, String event, String condition, String action){
         this.params = params;
@@ -59,6 +60,15 @@ public class Rule{
 
     public void setRuleParamsList(List<String> paramsList) {
         this.paramsList = paramsList;
+    }
+    
+     public List<String> getRuleParamsValues() {
+        return paramsValues;
+    }
+    
+
+    public void setRuleParamsValues(List<String> paramsValues) {
+        this.paramsValues = paramsValues;
     }
     
 

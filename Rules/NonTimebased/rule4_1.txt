@@ -1,6 +1,0 @@
-Input Parameters:["newRating","prodname","storeName"]
-Event:{MATCH (r:Retailer)
-MATCH (p:Product)-[sb:SoldBy]->(r) WHERE p.name = prodname and r.name = storeName SET r.Rating = newRating}
-Condition:{WITH r,newRating MATCH (c:Customer) WITH r,c,newRating MATCH (r2:Retailer) WITH r2,newRating OPTIONAL MATCH (c)-[gt:GoesTo]->(r) WHERE r.Rating = newRating}
-Action:{DELETE gt}
-//Values: WITH r, 3.0 as newRating,"c" as prodname,"Prestige Liquor Store" as storeName
