@@ -19,21 +19,24 @@ public class Rule{
     
     private List<String> paramsList;
     private int paramscount;
-	private String params;
+    private String params;
+    private String paramsformat;
     private String event;
     private String condition;
     private String action;
      private List<String> paramsValues;
     
-    public Rule(String params, String event, String condition, String action){
+    public Rule(String params, String paramsformat, String event, String condition, String action){
         this.params = params;
+        this.paramsformat = paramsformat;
         this.event = event;
         this.condition = condition;
         this.action = action;
     }
 
-	 public Rule(List<String> paramsList, String event, String condition, String action){
+	 public Rule(List<String> paramsList,String paramsformat, String event, String condition, String action){
         this.paramsList = paramsList;
+        this.paramsformat = paramsformat;
         this.event = event;
         this.condition = condition;
         this.action = action;
@@ -69,6 +72,15 @@ public class Rule{
 
     public void setRuleParamsValues(List<String> paramsValues) {
         this.paramsValues = paramsValues;
+    }
+    
+    public String getParamsFormat() {
+        return paramsformat;
+    }
+    
+
+    public void setParamsPormat(String paramsformat) {
+        this.paramsformat = paramsformat;
     }
     
 
@@ -110,6 +122,6 @@ public class Rule{
     }
     
     public String toString(){
-        return (this.params + " " + this.event + " " + this.condition + " " + this.action);
+        return (this.params + " " + this.paramsformat + " " + this.event + " " + this.condition + " " + this.action);
     }
 }

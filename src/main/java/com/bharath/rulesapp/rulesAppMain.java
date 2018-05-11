@@ -49,7 +49,7 @@ public class rulesAppMain {
             System.out.println("You entered " + usertestingnumber);
             
             try (Scanner eventinput = new Scanner(System.in)) {
-                System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable\n");
+                System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable: \n");
                 
                 String userinputevent = null;
                 ArrayList<String> userinputcompleteevent = new ArrayList<>();
@@ -63,6 +63,13 @@ public class rulesAppMain {
                 }
                 
                 System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
+                
+                String inputparamsformat = null;
+                try(Scanner userinputparamsformat = new Scanner(System.in)){
+                System.out.print("Please Enter the input params format for this event to Test:\n");
+                inputparamsformat = userinputparamsformat.nextLine();
+                }
+                
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat timeformat = new SimpleDateFormat("K:mm a");
                 String presenttime = timeformat.format(cal.getTime());
@@ -70,14 +77,14 @@ public class rulesAppMain {
                 
                 if(usertestingnumber ==1)
                 {
-                    String presenttimeevent = "WITH " + "\"" + presenttime + "\" AS currenttime ";
+                    String presenttimeevent = "WITH " + "\"" + presenttime + "\" AS currenttime";
                     System.out.println(presenttimeevent + userinputevent);
-                    findRules(presenttimeevent + userinputevent, 1);
+                    findRules(presenttimeevent + userinputevent,"", 1);
                 }
                 
                 if(usertestingnumber ==2)
                 {
-                    findRules(userinputevent,2);
+                    findRules(userinputevent,inputparamsformat,2);
                 }
             }
         }
