@@ -1,5 +1,6 @@
-Input Parameters:["prodname","storeName","newRating"]
+Input Parameters:[prodname,storeName,newRating]
+Input Params Format:{WITH prodname as productName, storeName as retailStoreName, newRating as newRatingofStore}
 Event:{MATCH (r:Retailer)
-MATCH (p:Product)-[sb:SoldBy]->(r) WHERE p.name = prodname and r.name = storeName SET r.Rating = newRating}
-Condition:{WITH r,newRating MATCH (c:Customer) WITH r,c,newRating MATCH (r2:Retailer) WITH r2,newRating OPTIONAL MATCH (c)-[gt:GoesTo]->(r) WHERE r.Rating = newRating}
+MATCH (p:Product)-[sb:SoldBy]->(r) WHERE p.name = productName and r.name = retailStoreName SET r.Rating = newRatingofStore}
+Condition:{WITH r,newRatingofStore MATCH (c:Customer) WITH r,c,newRatingofStore MATCH (r2:Retailer) WITH r2,newRatingofStore OPTIONAL MATCH (c)-[gt:GoesTo]->(r) WHERE r.Rating = newRatingofStore}
 Action:{DELETE gt}

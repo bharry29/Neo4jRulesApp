@@ -1,4 +1,5 @@
-Input Parameters:[{0}]
+Input Parameters:[input]
+Input Params Format:{WITH message as input}
 Event:{CREATE (a:Greeting2)}
-Condition:{SET a.message = "Hello Aira"}
-Action:{RETURN a.message + ', from node ' + id(a)}
+Condition:{SET a.message = input}
+Action:{RETURN a.message + id(a)}

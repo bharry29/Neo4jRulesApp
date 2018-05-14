@@ -51,23 +51,23 @@ public class rulesAppMain {
             try (Scanner eventinput = new Scanner(System.in)) {
                 System.out.print("Please Enter a CQL Event to Test if there are any rules are applicable: \n");
                 
-                String userinputevent = null;
-                ArrayList<String> userinputcompleteevent = new ArrayList<>();
-                for(userinputevent = eventinput.nextLine();!userinputevent.isEmpty();userinputevent = eventinput.nextLine()){
-                    userinputcompleteevent.add(userinputevent);
+                String eventFromUser = null;
+                ArrayList<String> completeEventFromUser = new ArrayList<>();
+                for(eventFromUser = eventinput.nextLine();!eventFromUser.isEmpty();eventFromUser = eventinput.nextLine()){
+                    completeEventFromUser.add(eventFromUser);
                 }
                 
-                for(String s: userinputcompleteevent)
+                for(String s: completeEventFromUser)
                 {
-                    userinputevent += s+" ";
+                    eventFromUser += s+" ";
                 }
                 
-                System.out.println("Your event is : " + "\"" + userinputevent + "\" \n");
+                System.out.println("Your event is : " + "\"" + eventFromUser + "\" \n");
                 
-                String inputparamsformat = null;
+                String inputParamsValuesFromUser = "";
                 try(Scanner userinputparamsformat = new Scanner(System.in)){
                 System.out.print("Please Enter the input params format for this event to Test:\n");
-                inputparamsformat = userinputparamsformat.nextLine();
+                inputParamsValuesFromUser = userinputparamsformat.nextLine();
                 }
                 
                 Calendar cal = Calendar.getInstance();
@@ -78,13 +78,13 @@ public class rulesAppMain {
                 if(usertestingnumber ==1)
                 {
                     String presenttimeevent = "WITH " + "\"" + presenttime + "\" AS currenttime";
-                    System.out.println(presenttimeevent + userinputevent);
-                    findRules(presenttimeevent + userinputevent,"", 1);
+                    System.out.println(presenttimeevent + eventFromUser);
+                    findRules(presenttimeevent + eventFromUser,inputParamsValuesFromUser, 1);
                 }
                 
                 if(usertestingnumber ==2)
                 {
-                    findRules(userinputevent,inputparamsformat,2);
+                    findRules(eventFromUser,inputParamsValuesFromUser,2);
                 }
             }
         }

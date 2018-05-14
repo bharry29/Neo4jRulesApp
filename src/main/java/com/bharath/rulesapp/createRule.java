@@ -78,7 +78,7 @@ public class createRule {
         System.out.print("Enter your Rule's Action part: ");
         ruleinputAction = input.nextLine();
         
-        String fullrule = "Input Parameters:" + ruleinputparameterslist + "\n" + "Input Params Format:" +"[" + ruleinputparamsformat + "]"  + "\n" + "Event:" +"[" + ruleinputevent + "]" + "\n" + "Condition:" + "[" + ruleinputcondition + "]" +  "\n" + "Action:" + "[" + ruleinputAction + "]";
+        String fullrule = "Input Parameters:" + ruleinputparameterslist + "\n" + "Input Params Format:" +"{" + ruleinputparamsformat + "}"  + "\n" + "Event:" +"{" + ruleinputevent + "}" + "\n" + "Condition:" + "{" + ruleinputcondition + "}" +  "\n" + "Action:" + "{" + ruleinputAction + "}";
         
 //        System.out.println("Your rule is: " + ruleinputname + "\n" + ruleinputparameterslist + "\n" + fullrule);
 
