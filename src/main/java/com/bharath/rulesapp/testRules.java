@@ -18,6 +18,7 @@ import java.util.Scanner;
 import static com.bharath.rulesapp.TestDB.testRule;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  *
  * @author bharathvadlamannati
