@@ -79,7 +79,7 @@ public class Rule{
     }
     
 
-    public void setParamsPormat(String paramsformat) {
+    public void setParamsFormat(String paramsformat) {
         this.paramsformat = paramsformat;
     }
     

@@ -84,6 +84,7 @@ public class rulesAppMain {
                 
                 if(usertestingnumber ==2)
                 {
+
                     findRules(eventFromUser,inputParamsValuesFromUser,2);
                 }
             }

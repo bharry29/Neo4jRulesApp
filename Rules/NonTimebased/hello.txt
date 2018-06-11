@@ -1,5 +1,0 @@
-Input Parameters:[hello param]
-Input Params Format:{WITH hello}
-Event:{hello}
-Condition:{hellocond}
-Action:{helloact}

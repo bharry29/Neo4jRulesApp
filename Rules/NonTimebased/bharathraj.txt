@@ -1,5 +1,5 @@
 Input Parameters:[input]
-Input Params Format:{WITH message as input}
+Input Params Format:{WITH lol as input}
 Event:{CREATE (a:Greeting2)}
 Condition:{SET a.message = input}
 Action:{RETURN a.message + id(a)}

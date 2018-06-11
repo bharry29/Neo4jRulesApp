@@ -58,16 +58,10 @@ public class testRules {
                 
                 String eventInRuleFile = "";
                 String partOfEventFromFile = "";
-               
+               String inputParamsFormatInFile="";
+               String partOfInputParamsFormatInFile = "";
                 
-                while(txtscan.hasNextLine()){
-                    String nextLine = txtscan.nextLine();
-                    partOfEventFromFile += nextLine + " ";
-                    
-                    if(nextLine.contains("}")){
-                        break;
-                    }
-                }
+               
                 
                 List<String> paramsListInRule = new ArrayList<>();
                 
@@ -88,24 +82,46 @@ public class testRules {
                     }
                 }
                 
-                if(partOfEventFromFile != null && !partOfEventFromFile.isEmpty()){
+                if(txtscan.hasNextLine()){
+                    String inputParamsString = txtscan.nextLine();
+                    
+                    if(inputParamsString.contains("Input Params Format:")){
+                        int endIndex = inputParamsString.lastIndexOf("}");
+                        int startIndex = inputParamsString.indexOf("{");
+                        inputParamsFormatInFile = inputParamsString.substring(startIndex+1,endIndex);
+                        if(inputParamsFormatInFile != null && !inputParamsFormatInFile.isEmpty()){
+                           
+                            newRule.setParamsFormat(inputParamsFormatInFile);
+                        }
+                    }
+                }
+                
+                 while(txtscan.hasNextLine()){
+                    String nextLine = txtscan.nextLine();
+                    partOfEventFromFile += nextLine + " ";
+                    
+                    if(nextLine.contains("}")){
+                        break;
+                    }
+                }
+                
+                if(!partOfEventFromFile.isEmpty()){
                     // partOfEventFromFile = txtscan.nextLine();
                     if(partOfEventFromFile.contains("Event:")){
-                        resultFileNames.add(file.getName());
-                        resultFilePaths.add(file.getPath());
+                      
                         int startIndex = partOfEventFromFile.indexOf("{");
                         int endIndex = partOfEventFromFile.lastIndexOf("}");
                         eventInRuleFile = partOfEventFromFile.substring(startIndex+1,endIndex);
-                        count++;
-                        
+                       
                     }
                 }
                 
                 // Match user input for params with the rule input params
 //                inputParamValues = matchInput(eventFromUser.trim(), eventInRuleFile.trim(), paramsListInRule);
-                
-                inputParamValues = matchInput(inputParamsValuesFromUser.trim(), eventInRuleFile.trim(), paramsListInRule);
 
+        if(eventInRuleFile.trim().equals(eventFromUser.trim())){
+                inputParamValues = matchInput(inputParamsValuesFromUser.trim(), inputParamsFormatInFile.trim(), paramsListInRule);
+                }
                 if(inputParamValues!=null){
                     List<String> paramsvalues = new ArrayList<String>();
                     int paramArraySize  = paramsListInRule.size();
@@ -114,41 +130,43 @@ public class testRules {
                         paramsvalues.add(inputParamValues[i]);
                     }
                     
-                    System.out.println("Values from the end user are:" + paramsvalues);
+                    //System.out.println("Values from the end user are:" + paramsvalues);
                     
-                    if(inputParamValues != null)
-                    {
-                        newRule.setEvent(eventInRuleFile);
-                        
-                        newRule.setRuleParamsValues(Arrays.asList(inputParamValues));
-                        
-                        if(txtscan.hasNextLine()){
-                            String condition = txtscan.nextLine();
-                            if(condition.contains("Condition:")){                                
-                                int startIndex = condition.indexOf("}");
-                                int endIndex = condition.lastIndexOf("{");
-                                String conditionInRuleFile = condition.substring(startIndex+1,endIndex);
-                                newRule.setCondition(conditionInRuleFile);
-                            }
+                   
+                    count++;
+                    resultFileNames.add(file.getName());
+                    resultFilePaths.add(file.getPath());
+                    newRule.setEvent(eventInRuleFile);
+
+                    newRule.setRuleParamsValues(Arrays.asList(inputParamValues));
+
+                    if(txtscan.hasNextLine()){
+                        String condition = txtscan.nextLine();
+                        if(condition.contains("Condition:")){                                
+                            int startIndex = condition.indexOf("{");
+                            int endIndex = condition.lastIndexOf("}");
+                            String conditionInRuleFile = condition.substring(startIndex+1,endIndex);
+                            newRule.setCondition(conditionInRuleFile);
                         }
-                        
-                        if(txtscan.hasNextLine()){
-                            String action = txtscan.nextLine();
-                            if(action.contains("Action:")){
-                                int startIndex = action.indexOf("}");
-                                int endIndex = action.lastIndexOf("{");
-                                String actionInRuleFile = action.substring(startIndex+1,endIndex);
-                                newRule.setAction(actionInRuleFile);
-                            }
-                        }
-                        
-                        rulesList.add(newRule);
                     }
+
+                    if(txtscan.hasNextLine()){
+                        String action = txtscan.nextLine();
+                        if(action.contains("Action:")){
+                            int startIndex = action.indexOf("{");
+                            int endIndex = action.lastIndexOf("}");
+                            String actionInRuleFile = action.substring(startIndex+1,endIndex);
+                            newRule.setAction(actionInRuleFile);
+                        }
+                    }
+
+                    rulesList.add(newRule);
+                    
                 }
                 else{
                 
-                    System.out.println("No input parameters found");
-                    break;
+                    //System.out.println("No input parameters found");
+                    //break;
                 }
             }
         }
