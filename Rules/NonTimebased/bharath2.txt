@@ -1,0 +1,5 @@
+Input Parameters:[ipnut1, input2]
+Input Params Format:{WITH ipnut1 as ipnut1, input2 as input2}
+Event:{event}
+Condition:{condition}
+Action:{action}

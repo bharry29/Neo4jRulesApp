@@ -1,5 +1,5 @@
 Input Parameters:[cName]
-Input Params Format:{WITH name as cName}
+Input Params Format:{WITH {name} as cName}
 Event:{MATCH (c:Customer) WITH c}
 Condition:{WHERE c.Name = cName}
 Action:{RETURN c.GoesTo LIMIT 1}

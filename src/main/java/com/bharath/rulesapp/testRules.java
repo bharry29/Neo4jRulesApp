@@ -135,6 +135,7 @@ public class testRules {
                     
                    
                     count++;
+                    
                     resultFileNames.add(file.getName());
                     resultFilePaths.add(file.getPath());
                     newRule.setEvent(eventInRuleFile);
