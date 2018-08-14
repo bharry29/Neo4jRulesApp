@@ -1,2 +1,2 @@
 # Neo4jRulesApp
-Initial Commit for My Masters Project
+This app is built using Java with Neo4j Plugin to simulate the concept of Triggers in Neo4j.
